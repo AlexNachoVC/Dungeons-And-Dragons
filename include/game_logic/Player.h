@@ -29,6 +29,6 @@ public:
     void setName(string name);
     void setMagicPoints(int magicPoints);
 
-    bool addDefeatedMonster(Monster);
-    void displayDefeadedMonsters();
+    bool addDefeatedMonster(Monster nMonster);
+    void displayDefeatedMonsters();
 };

@@ -2,10 +2,6 @@
 
 Room::Room() : roomMonster() {}
 
-Room::Room(Monster roomMonster) {
-    this->roomMonster = roomMonster;
-}
-
 Room::~Room() {
 
 }

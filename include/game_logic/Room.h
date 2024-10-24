@@ -11,7 +11,6 @@ private:
 
 public:
     Room();
-    Room(Monster roomMonster);
     ~Room();
 
     friend ostream& operator<<(ostream& os, const Room& Room);

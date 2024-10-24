@@ -13,5 +13,6 @@ public:
     Room();
     Room(Monster roomMonster);
     ~Room();
-    bool assignRandomMonster(Catalog);
+
+    friend ostream& operator<<(ostream& os, const Room& Room);
 };

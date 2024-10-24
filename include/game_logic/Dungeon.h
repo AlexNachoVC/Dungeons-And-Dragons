@@ -12,6 +12,7 @@ private:
 
 public:
     Dungeon();
+    Dungeon(DoublyLinkedList<Room> Rooms);
     ~Dungeon();
     void traverseDungeon();
 };

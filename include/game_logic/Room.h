@@ -11,6 +11,7 @@ private:
 
 public:
     Room();
+    Room(Monster roomMonster);
     ~Room();
     bool assignRandomMonster(Catalog);
 };

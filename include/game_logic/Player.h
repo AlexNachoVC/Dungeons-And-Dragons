@@ -16,6 +16,7 @@ private:
 
 public:
     Player();
+    Player(int hitPoints, string race, string name, int magicPoints, LinkedList<Monster> defeatedMonsters);
     ~Player();
 
     int getHitPoints();

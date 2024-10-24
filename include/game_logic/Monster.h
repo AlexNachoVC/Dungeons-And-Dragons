@@ -16,6 +16,7 @@ private:
 
 public:
     Monster();
+    Monster(string name, int challengeRating, string type, string size, int armorClass, int hitPoints, string alignment);
     ~Monster();
 
     string getName();

@@ -4,8 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "include/game_logic/Monster.h"
-#include "lib/templates/BinarySearchTree.hpp"
+#include "../../include/game_logic/Monster.h"
+#include "../../lib/templates/BinarySearchTree.hpp"
 
 
 #define MONSTER_ATTRIB_SIZE 7

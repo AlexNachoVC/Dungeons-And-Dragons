@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "lib/templates/SinglyLinkedlist.hpp"
+#include "../../lib/templates/SinglyLinkedlist.hpp"
 #include "Monster.h"
 
 using namespace std;

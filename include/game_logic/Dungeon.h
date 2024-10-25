@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Room.h"
-#include "lib/templates/DoublyLinkedList.hpp"
+#include "../../lib/templates/DoublyLinkedList.hpp"
 
 using namespace std;
 

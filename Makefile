@@ -1,13 +1,39 @@
-CXXFLAGS = -g -Wall --pedantic
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -g -Wall --pedantic -Iinclude -Ilib/templates -Ilib/helpers
 
-main: main.o
-	g++ $(CXXFLAGS) main.o -o main
+# Directories
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
+INCLUDE_DIR = include
 
-main.o: main.cpp
-	g++ -c $(CXXFLAGS) main.cpp
+# Source files
+SRCS = $(wildcard $(SRC_DIR)/main.cpp $(SRC_DIR)/game_logic/*.cpp)
 
-clean: 
-	rm *.o main
+# Object files
+OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
-valgrind: main
-	valgrind --leak-check=full ./main
+# Executable
+TARGET = $(BIN_DIR)/main
+
+# Default target
+all: $(TARGET)
+
+# Link the executable
+$(TARGET): $(OBJS)
+	@mkdir -p $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+
+# Compile source files into object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)/game_logic
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean up
+clean:
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+# Run valgrind
+valgrind: $(TARGET)
+	valgrind --leak-check=full $(TARGET)

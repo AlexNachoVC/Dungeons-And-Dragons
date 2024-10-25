@@ -1,9 +1,9 @@
 #include <iostream>
-#include "include/game_logic/Catalog.h"
-#include "include/game_logic/Dungeon.h"
-#include "include/game_logic/Monster.h"
-#include "include/game_logic/Player.h"
-#include "include/game_logic/Room.h"
+#include "game_logic/Catalog.h"
+#include "game_logic/Dungeon.h"
+#include "game_logic/Monster.h"
+#include "game_logic/Player.h"
+#include "game_logic/Room.h"
 
 using namespace std;
 

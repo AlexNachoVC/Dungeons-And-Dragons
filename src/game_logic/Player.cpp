@@ -47,10 +47,9 @@ void Player::setMagicPoints(int magicPoints) {
 }
 
 bool Player::addDefeatedMonster(Monster nMonster) {
-    defeatedMonsters.insertOnOrder(nMonster);
+    return defeatedMonsters.insertOnOrder(nMonster);
 }
 
-bool Player::displayDefeatedMonsters() {
+void Player::displayDefeatedMonsters() {
     defeatedMonsters.printList();
-    return true;
 }

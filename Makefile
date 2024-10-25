@@ -28,7 +28,6 @@ $(TARGET): $(OBJS)
 # Compile source files into object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)/game_logic
-	@mkdir -p $(OBJ_DIR)/helpers
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up

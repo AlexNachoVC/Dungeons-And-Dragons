@@ -5,12 +5,12 @@
 using namespace std;
 
 template <typename T>
-class Node {
+class StackNode {
 public:
     T data;
-    Node<T> *next;
+    StackNode<T> *next;
 
-    Node(T data) {
+    StackNode(T data) {
         this->data = data;
         this->next = nullptr;
     }
@@ -19,7 +19,7 @@ public:
 template <typename T>
 class Stack {
 private:
-    Node<T> *top;
+    StackNode<T> *top;
     
 public:
     Stack() {
@@ -31,7 +31,7 @@ public:
     }
 
     bool push (T data) {
-        Node<T> *newNode = new(nothrow) Node<T>(data);
+        StackNode<T> *newNode = new(nothrow) StackNode<T>(data);
 
         if (!newNode) {
             return false;
@@ -52,7 +52,7 @@ public:
             return false;
         }
 
-        Node<T> *tmp = top;
+        StackNode<T> *tmp = top;
         top = top->next;
         delete tmp;
 
@@ -71,7 +71,7 @@ public:
     }
 
     void print() {
-        Node<T> *curr = top;
+        StackNode<T> *curr = top;
 
         while (curr) {
             cout << curr->data << " ";

@@ -5,12 +5,12 @@
 using namespace std;
 
 template <typename T>
-class Node {
+class QueueNode {
 public:
     T Data;
-    Node<T> *next;
+    QueueNode<T> *next;
 
-    Node(T value) {
+    QueueNode(T value) {
         Data = value;
         next = nullptr;
     }
@@ -19,8 +19,8 @@ public:
 template <typename T>
 class Queue {
 private: 
-    Node<T> *head;
-    Node<T> *tail;
+    QueueNode<T> *head;
+    QueueNode<T> *tail;
 
 public: 
     Queue() {
@@ -35,7 +35,7 @@ public:
     }
     
     bool enqueue(T value) {
-        Node<T> *newNode = new (nothrow) Node<T>(value);
+        QueueNode<T> *newNode = new (nothrow) QueueNode<T>(value);
         if (!newNode) {
             return false;
         }
@@ -56,7 +56,7 @@ public:
             return false;
         }
 
-        Node<T> *tmp = head;
+        QueueNode<T> *tmp = head;
         head = head->next;
         if (!head) {
             tail = nullptr;
@@ -74,7 +74,7 @@ public:
     }
 
     void printQueue() {
-        Node<T> *curr = head;
+        QueueNode<T> *curr = head;
 
         while (curr) {
             cout << curr->Data << " ";

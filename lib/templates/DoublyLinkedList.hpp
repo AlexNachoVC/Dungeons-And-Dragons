@@ -5,13 +5,13 @@
 using namespace std;
 
 template <typename T>
-class Node {
+class DoublyLinkedListNode {
 public:
     T data;
-    Node<T> *prev;
-    Node<T> *next;
+    DoublyLinkedListNode<T> *prev;
+    DoublyLinkedListNode<T> *next;
 
-    Node(T data) {
+    DoublyLinkedListNode(T data) {
         this->data = data;
         this->prev = nullptr;
         this->next = nullptr;
@@ -21,8 +21,8 @@ public:
 template <typename T>
 class DoublyLinkedList {
 private: 
-    Node<T> *head;
-    Node<T> *tail;
+    DoublyLinkedListNode<T> *head;
+    DoublyLinkedListNode<T> *tail;
 public: 
     DoublyLinkedList() {
     head = nullptr;
@@ -34,7 +34,7 @@ public:
     }
 
     bool prepend(T value) {
-        Node<T> *newNode = new(nothrow) Node<T>(value);
+        DoublyLinkedListNode<T> *newNode = new(nothrow) DoublyLinkedListNode<T>(value);
         if (!newNode) {
             return false;
         }
@@ -51,7 +51,7 @@ public:
     }
 
     bool append(T value) {
-        Node<T> *newNode = new(nothrow) Node<T>(value);
+        DoublyLinkedListNode<T> *newNode = new(nothrow) DoublyLinkedListNode<T>(value);
         if (!newNode) {
             return false;
         }
@@ -76,12 +76,12 @@ public:
             return prepend(value);
         }
 
-        Node<T> *newNode = new(nothrow) Node<T>(value);
+        DoublyLinkedListNode<T> *newNode = new(nothrow) DoublyLinkedListNode<T>(value);
         if (!newNode) {
             return false;
         }
 
-        Node<T> *tmp = head;
+        DoublyLinkedListNode<T> *tmp = head;
 
         for (int i = 1; tmp != nullptr && i < position - 1; i++) {
             tmp = tmp->next;
@@ -101,7 +101,7 @@ public:
     }
 
     bool insertOnOrder(T value) {
-        Node<T> *newNode = nullptr;
+        DoublyLinkedListNode<T> *newNode = nullptr;
         newNode = new (nothrow) Node(value);
 
         if (!newNode) {
@@ -122,7 +122,7 @@ public:
             return true;
         }
 
-        Node<T> *current = head;
+        DoublyLinkedListNode<T> *current = head;
         while (current->next && current->next->data < value) {
             current = current->next;
         }
@@ -146,7 +146,7 @@ public:
         }
 
         if (head->data == element) {
-            Node<T> *tmp = head;
+            DoublyLinkedListNode<T> *tmp = head;
             head = head->next;
             if (head) {
                 head->prev = nullptr;
@@ -157,7 +157,7 @@ public:
             return true;
         }
 
-        Node<T> *current = head;
+        DoublyLinkedListNode<T> *current = head;
 
         while (current && current->data != element) {
             current = current->next;
@@ -186,7 +186,7 @@ public:
             return false;
         }
 
-        Node<T> *tmp = head;
+        DoublyLinkedListNode<T> *tmp = head;
         head = head->next;
 
         if (head != nullptr) {
@@ -204,7 +204,7 @@ public:
             return false;
         }
 
-        Node<T> *tmp = tail;
+        DoublyLinkedListNode<T> *tmp = tail;
         tail = tail->prev;
 
         if (tail != nullptr) {
@@ -226,7 +226,7 @@ public:
             return deleteAtBeginning();
         }
 
-        Node<T> *tmp = head;
+        DoublyLinkedListNode<T> *tmp = head;
 
         for (int i = 1; tmp != nullptr && i < position; i++) {
             tmp = tmp->next;
@@ -249,7 +249,7 @@ public:
 
     void deleteLinkedList() {
         while (head) {
-            Node<T> *tmp = head;
+            DoublyLinkedListNode<T> *tmp = head;
             head = head->next;
             if (head) {
                 head->prev = nullptr;
@@ -264,7 +264,7 @@ public:
             return;
         }
 
-        Node<T> *tmp = head;
+        DoublyLinkedListNode<T> *tmp = head;
 
         while (tmp) {
             cout << tmp->data << " ";
@@ -278,7 +278,7 @@ public:
             return;
         }
 
-        Node<T> *tmp = tail;
+        DoublyLinkedListNode<T> *tmp = tail;
 
         while (tmp) {
             cout << tmp->data << " ";

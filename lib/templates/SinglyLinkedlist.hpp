@@ -5,12 +5,12 @@
 using namespace std;
 
 template <typename T>
-class Node {
+class SinglyLinkedListNode {
 public:
     T data;
-    Node<T> *next;
+    SinglyLinkedListNode<T> *next;
 
-    Node() {
+    SinglyLinkedListNode() {
         next = nullptr;
     };
 };
@@ -18,7 +18,7 @@ public:
 template <typename T>
 class LinkedList {
 private:
-    Node<T> *head;
+    SinglyLinkedListNode<T> *head;
 public:
     LinkedList() {
         head = nullptr;
@@ -30,8 +30,8 @@ public:
 
     // O(n)
     bool insertAtEnd(T value) {
-        Node<T> *tmp = nullptr, *newNode = nullptr;
-        newNode = new (nothrow) Node<T>;
+        SinglyLinkedListNode<T> *tmp = nullptr, *newNode = nullptr;
+        newNode = new (nothrow) SinglyLinkedListNode<T>;
 
         if (!newNode) {
             return false;
@@ -53,7 +53,7 @@ public:
 
     // O(1)
     bool insertAtBeginning(T value) {
-        Node<T> *newNode = new(nothrow) Node<T>;
+        SinglyLinkedListNode<T> *newNode = new(nothrow) SinglyLinkedListNode<T>;
         if (!newNode) {
             return false;
         }
@@ -66,8 +66,8 @@ public:
 
     // O(n)
     bool insertOnOrder(T value) {
-        Node<T> *newNode = nullptr;
-        newNode = new (nothrow) Node<T>;
+        SinglyLinkedListNode<T> *newNode = nullptr;
+        newNode = new (nothrow) SinglyLinkedListNode<T>;
 
         if (!newNode) {
             return false;
@@ -87,7 +87,7 @@ public:
             return true;
         }
 
-        Node<T> *current = head;
+        SinglyLinkedListNode<T> *current = head;
         while (current->next && current->next->dato < value) {
             current = current->next;
         }
@@ -99,7 +99,7 @@ public:
 
     // O(n)
     void printList() {
-        Node<T> *tmp = head;
+        SinglyLinkedListNode<T> *tmp = head;
 
         while (tmp) {
             cout << tmp->dato << " ";
@@ -114,7 +114,7 @@ public:
             return;
         }
         while (head) {
-            Node<T> *tmp = head;
+            SinglyLinkedListNode<T> *tmp = head;
             head = head->next;
             delete tmp;
         }
@@ -127,14 +127,14 @@ public:
         }
 
         if (head->dato == element) {
-            Node<T> *tmp = head;
+            SinglyLinkedListNode<T> *tmp = head;
             head = head->next;
             delete tmp;
             return true;
         }
 
-        Node<T> *current = head;
-        Node<T> *previous = nullptr;
+        SinglyLinkedListNode<T> *current = head;
+        SinglyLinkedListNode<T> *previous = nullptr;
 
         while (current && current->dato != element) {
             previous = current;
@@ -163,7 +163,7 @@ public:
             return true;
         }
 
-        Node<T> *current = head;
+        SinglyLinkedListNode<T> *current = head;
         while (current->next->next) {
             current = current->next;
         }
@@ -177,7 +177,7 @@ public:
     int cuentaMenores(int dato) {
         int count(0);
 
-        Node<T> *current = head;
+        SinglyLinkedListNode<T> *current = head;
         while (current) {
             if (current->data < dato) {
                 count++;

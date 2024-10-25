@@ -10,3 +10,8 @@ Dungeon::~Dungeon() {
 void Dungeon::traverseDungeon() {
     this->Rooms.printListForwards();
 }
+
+void Dungeon::createRoom(Monster* monster) {
+    Room* newRoom = new Room(monster);
+    this->Rooms.append(*newRoom);
+}

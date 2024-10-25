@@ -6,12 +6,11 @@ Catalog::Catalog() : monsterCatalog() {
 
 Catalog::~Catalog() {}
 
-bool Catalog::loadMonstersFromCSV() {
-    string filename = "monsters.csv";
-    unsigned int loadedCount = ::loadMonstersFromCSV(filename, monsterCatalog);
+bool Catalog::loadMonstersFromCSV(const string& fileName) {
+    unsigned int loadedCount = ::loadMonstersFromCSV(fileName, monsterCatalog);
     return loadedCount > 0;
 }
 
-bool Catalog::selectRandomMonster() {
+Monster* Catalog::selectRandomMonster() {
     return monsterCatalog.getRandomNode();
 }

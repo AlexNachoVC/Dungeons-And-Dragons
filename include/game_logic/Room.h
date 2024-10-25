@@ -10,7 +10,7 @@ private:
     Monster roomMonster;
 
 public:
-    Room();
+    Room(Monster* monster);
     ~Room();
 
     friend ostream& operator<<(ostream& os, const Room& Room);

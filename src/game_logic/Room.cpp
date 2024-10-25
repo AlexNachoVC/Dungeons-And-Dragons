@@ -1,6 +1,6 @@
 #include "../../include/game_logic/Room.h"
 
-Room::Room() : roomMonster() {}
+Room::Room(Monster* monster) : roomMonster(*monster) {}
 
 Room::~Room() {
 

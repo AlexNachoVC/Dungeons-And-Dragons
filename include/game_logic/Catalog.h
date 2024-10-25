@@ -19,6 +19,6 @@ public:
     Catalog();
     ~Catalog();
     
-    bool loadMonstersFromCSV();
-    bool selectRandomMonster();
+    bool loadMonstersFromCSV(const string& fileName);
+    Monster* selectRandomMonster();
 };

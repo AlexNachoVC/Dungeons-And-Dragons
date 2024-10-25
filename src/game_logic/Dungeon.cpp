@@ -11,7 +11,16 @@ void Dungeon::traverseDungeon() {
     this->Rooms.printListForwards();
 }
 
-void Dungeon::createRoom(Monster* monster) {
+bool Dungeon::createRoom(Monster* monster) {
+    if (monster == nullptr) {
+        return false;
+    }
+
     Room* newRoom = new Room(monster);
-    this->Rooms.append(*newRoom);
+    if (newRoom == nullptr) {
+        return false;
+    }
+
+    return this->Rooms.append(*newRoom);
+
 }

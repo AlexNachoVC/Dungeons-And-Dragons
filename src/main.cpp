@@ -29,6 +29,13 @@ int main() {
         }
 
         copiaMonstruo = *pMonster;
-        if(!myDungeon.)
+        if(!myDungeon.createRoom(&copiaMonstruo)) {
+            cout << "No se pudo insertar cuarto con monstruo al calabozo" << endl;
+            return 0;
+        }
     }
+
+    myDungeon.traverseDungeon();
+
+    return 0;
 }

@@ -9,7 +9,7 @@ BIN_DIR = bin
 INCLUDE_DIR = include
 
 # Source files
-SRCS = $(wildcard $(SRC_DIR)/main.cpp $(SRC_DIR)/game_logic/*.cpp)
+SRCS = $(wildcard $(SRC_DIR)/main.cpp $(SRC_DIR)/game_logic/*.cpp $(SRC_DIR)/helpers/*.cpp)
 
 # Object files
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
@@ -28,6 +28,7 @@ $(TARGET): $(OBJS)
 # Compile source files into object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)/game_logic
+	@mkdir -p $(OBJ_DIR)/helpers
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up

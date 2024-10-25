@@ -1,5 +1,4 @@
 #include "../../include/game_logic/Player.h"
-#include "Player.h"
 
 Player::Player() : hitPoints(0), race(""), name(""), magicPoints(0), defeatedMonsters() {}
 
@@ -51,6 +50,7 @@ bool Player::addDefeatedMonster(Monster nMonster) {
     defeatedMonsters.insertOnOrder(nMonster);
 }
 
-void Player::displayDefeatedMonsters() {
+bool Player::displayDefeatedMonsters() {
     defeatedMonsters.printList();
+    return true;
 }

@@ -1,86 +1,75 @@
 #include "CSVLoader.h"
+#include "../../include/game_logic/Monster.h"
+#include "../../lib/templates/BinarySearchTree.hpp"
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
-
-unsigned int loadMonstersFromCSV(const std::string& fileName, BST<Monster>& monsterCatalog) {
-    std::ifstream file(fileName);
-    std::string line;
-    unsigned int size = 0;
+bool loadFromCSV(const std::string& fileName, BST<Monster>& monsterCatalog) {
+    ifstream        file(fileName);
+    string          line;
+    unsigned int    size = 0;
 
     if (!file.is_open()) {
-        std::cerr << "Error al abrir el archivo: " << fileName << std::endl;
-        return 0;
+        cerr << "Error al abrir el archivo: " << fileName << endl;
+        return false;
     }
 
-    // skip header
-    if(!std::getline(file, line)) {
-        std::cerr << "El archivo no tiene header" << std::endl;
+    if (!getline(file, line)) {
+        cerr << "El archivo no tiene header" << endl;
         file.close();
-        return 0;
+        return false;
     }
 
-    std::cout << "Cargando archivo: " << fileName << std::endl;
+    cout << "Cargando archivo: " << fileName << endl;
 
-    while (std::getline(file, line)) {
-        Monster        nMonster;
-        std::stringstream    ss(line);
-        std::string          cell;
+    while (getline(file, line)) {
+        Monster         nMonster;
+        stringstream    ss(line);
+        string          cell;
         int             campo = 0, errores = 0;
 
-
-        if(fileName == "monsters.csv") {
-
-            while (std::getline(ss, cell, ',')) {
-                if(!cell.length())
-                    errores ++;
-
-                switch(campo) {
-                    case 0:
-                        nMonster.setName(cell);
-                        break;
-                    case 1:
-                        nMonster.setChallengeRating(std::stoi(cell));
-                        break;
-                    case 2:
-                        nMonster.setType(cell);
-                        break;
-                    case 3:
-                        nMonster.setsSize(cell);
-                        break;
-                    case 4:
-                        nMonster.setArmorClass(std::stoi(cell));
-                        break;
-                    case 5:
-                        nMonster.setHitPoints(std::stoi(cell));
-                        break;
-                    case 6:
-                        nMonster.setAlignment(cell);
-                        break;
-
-                    default:
-                        errores ++;
-                        break;
-                }
-                campo ++;
+        while (getline(ss, cell, ',')) {
+            if (!cell.length())
+                errores++;
+            switch (campo) {
+            case 0:
+                nMonster.setName(cell);
+                break;
+            case 1:
+                nMonster.setChallengeRating(stof(cell)); // Convertir string a float
+                break;
+            case 2:
+                nMonster.setType(cell);
+                break;
+            case 3:
+                nMonster.setsSize(cell);
+                break;
+            case 4:
+                nMonster.setArmorClass(stoi(cell)); // Convertir string a int
+                break;
+            case 5:
+                nMonster.setHitPoints(stoi(cell)); // Convertir string a int
+                break;
+            case 6:
+                nMonster.setAlignment(cell);
+                break;
+            default:
+                errores++;
+                break;
             }
 
-            if(errores || campo != MONSTER_ATTRIB_SIZE) {
-                std::cerr << "Error en la linea: " << std::endl << line << std::endl;
-                file.close();
-                return 0;
-            }
-
-            monsterCatalog.insert(nMonster);
-            size++;
+            campo++;
         }
-        else {
-            std::cerr << "Tipo de archivo desconocido: " << std::endl;
+        if (errores) {
+            cerr << "Error en la linea: " << endl << line << endl;
             file.close();
-            return 0;
+            return false;
         }
+        monsterCatalog.insert(nMonster);
     }
-
     file.close();
-    return size;
+    return true;
 }
 
 int countDataLinesInCSV(const string& fileName) {

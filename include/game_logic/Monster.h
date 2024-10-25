@@ -22,7 +22,7 @@ public:
     string getName();
     int getChallengeRating();
     string getType();
-    string getsSize();
+    string getSize();
     int getArmorClass();
     int getHitPoints();
     string getAlignment();
@@ -30,7 +30,7 @@ public:
     void setName(string name);
     void setChallengeRating(int challengeRating);
     void setType(string type);
-    void setsSize(string size);
+    void setSize(string size);
     void setArmorClass(int armorClass);
     void setHitPoints(int hitPoints);
     void setAlignment(string alignment);

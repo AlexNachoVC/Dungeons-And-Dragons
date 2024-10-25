@@ -145,7 +145,7 @@ private:
         if (index < leftCount) {
             return getNodeByIndex(node->left, index);
         } else if (index == leftCount) {
-            return &(node->data);
+            return &(node->info);
         } else {
             return getNodeByIndex(node->right, index - leftCount - 1);
         }

@@ -102,7 +102,7 @@ public:
 
     bool insertOnOrder(T value) {
         DoublyLinkedListNode<T> *newNode = nullptr;
-        newNode = new (nothrow) Node(value);
+        newNode = new (nothrow) DoublyLinkedListNode<T>(value);
 
         if (!newNode) {
             return false;

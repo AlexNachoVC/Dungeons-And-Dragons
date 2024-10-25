@@ -13,7 +13,7 @@ int main() {
     Catalog myCatalog;
     Dungeon myDungeon;
 
-    if (!myCatalog.loadMonstersFromCSV("monsters.csv")) {
+    if (!myCatalog.loadMonstersFromCSV("assets/monsters.csv")) {
         cout << "No se pudo crear el catalogo" << endl;
         return 0;
     }
@@ -29,7 +29,7 @@ int main() {
         }
 
         copiaMonstruo = *pMonster;
-        if(!myDungeon.createRoom(&copiaMonstruo)) {
+        if(!myDungeon.createRoom(copiaMonstruo, c + 1)) {
             cout << "No se pudo insertar cuarto con monstruo al calabozo" << endl;
             return 0;
         }

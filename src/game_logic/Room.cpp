@@ -1,12 +1,14 @@
 #include "../../include/game_logic/Room.h"
 
-Room::Room(Monster* monster) : roomMonster(*monster) {}
+Room::Room() : roomMonster(), roomNumber(0) {}
+
+Room::Room(Monster& monster, int number) : roomMonster(monster), roomNumber(number) {}
 
 Room::~Room() {
 
 }
 
 ostream& operator<<(ostream& os, const Room& Room) {
-    os << "Cuarto con: " << Room.roomMonster;
+    os << "Cuarto " << Room.roomNumber << " con: " << Room.roomMonster << endl;
     return os;
 }

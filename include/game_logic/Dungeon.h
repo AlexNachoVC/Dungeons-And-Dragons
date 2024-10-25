@@ -14,5 +14,5 @@ public:
     Dungeon();
     ~Dungeon();
     void traverseDungeon();
-    bool createRoom(Monster* monster);
+    bool createRoom(Monster& monster, int roomNumber);
 };

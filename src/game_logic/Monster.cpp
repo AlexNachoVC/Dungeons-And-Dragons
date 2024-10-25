@@ -1,5 +1,4 @@
 #include "../../include/game_logic/Monster.h"
-#include "Monster.h"
 
 Monster::Monster() : name(""), challengeRating(0), type(""), size(""), armorClass(0), hitPoints(0), alignment("") {}
 
@@ -32,7 +31,7 @@ string Monster::getType()
     return type;
 }
 
-string Monster::getsSize()
+string Monster::getSize()
 {
     return size;
 }
@@ -64,7 +63,7 @@ void Monster::setType(string type) {
     this->type = type;
 }
 
-void Monster::setsSize(string size) {
+void Monster::setSize(string size) {
     this->size = size;
 }
 

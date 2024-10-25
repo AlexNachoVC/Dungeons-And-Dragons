@@ -30,5 +30,5 @@ public:
     void setMagicPoints(int magicPoints);
 
     bool addDefeatedMonster(Monster nMonster);
-    void displayDefeatedMonsters();
+    bool displayDefeatedMonsters();
 };

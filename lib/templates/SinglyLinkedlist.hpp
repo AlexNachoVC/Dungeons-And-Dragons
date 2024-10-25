@@ -73,7 +73,7 @@ public:
             return false;
         }
 
-        newNode->dato = value;
+        newNode->data = value;
         newNode->next = nullptr;
 
         if (!head) {
@@ -81,14 +81,14 @@ public:
             return true;
         }
 
-        if (value < head->dato) {
+        if (value < head->data) {
             newNode->next = head;
             head = newNode;
             return true;
         }
 
         SinglyLinkedListNode<T> *current = head;
-        while (current->next && current->next->dato < value) {
+        while (current->next && current->next->data < value) {
             current = current->next;
         }
 
@@ -102,7 +102,7 @@ public:
         SinglyLinkedListNode<T> *tmp = head;
 
         while (tmp) {
-            cout << tmp->dato << " ";
+            cout << tmp->data << " ";
             tmp = tmp->next;
         }
         cout << "\n";

@@ -1,12 +1,10 @@
 #include "CSVLoader.h"
-#include <fstream>
-#include <sstream>
-#include <iostream>
 
-unsigned int loadMonstersFromCSV(const std::string& fileName, Monster **&monsterArray, unsigned int &arraySize, unsigned int currentPos) {
+
+unsigned int loadMonstersFromCSV(const std::string& fileName, BST<Monster>& monsterCatalog) {
     std::ifstream file(fileName);
     std::string line;
-    unsigned int size = currentPos;
+    unsigned int size = 0;
 
     if (!file.is_open()) {
         std::cerr << "Error al abrir el archivo: " << fileName << std::endl;
@@ -30,7 +28,6 @@ unsigned int loadMonstersFromCSV(const std::string& fileName, Monster **&monster
 
 
         if(fileName == "monsters.csv") {
-            Monster nMonster;
 
             while (std::getline(ss, cell, ',')) {
                 if(!cell.length())
@@ -72,16 +69,8 @@ unsigned int loadMonstersFromCSV(const std::string& fileName, Monster **&monster
                 return 0;
             }
 
-            if(size < arraySize) {
-                monsterArray[size] = new Monster(nMonster);
-                size ++;
-                currentPos++;
-            }
-            else {
-                std::cerr << "Error, el arreglo es muy pequeño" << std::endl;
-                file.close();
-                return 0;
-            }
+            monsterCatalog.insert(nMonster);
+            size++;
         }
         else {
             std::cerr << "Tipo de archivo desconocido: " << std::endl;
@@ -91,7 +80,7 @@ unsigned int loadMonstersFromCSV(const std::string& fileName, Monster **&monster
     }
 
     file.close();
-    return currentPos;
+    return size;
 }
 
 int countDataLinesInCSV(const string& fileName) {

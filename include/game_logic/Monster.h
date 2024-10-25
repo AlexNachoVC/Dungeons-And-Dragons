@@ -36,4 +36,17 @@ public:
     void setAlignment(string alignment);
 
     void displayStats();
+
+    friend ostream& operator<<(ostream& os, const Monster& monster) {
+        os << monster.name;
+        return os;
+    }
+
+    bool operator<(const Monster& other) const {
+        return this->name < other.name;
+    }
+
+    bool operator>(const Monster& other) const {
+        return this->name > other.name;
+    }
 };

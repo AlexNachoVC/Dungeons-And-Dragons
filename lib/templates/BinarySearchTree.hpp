@@ -1,5 +1,7 @@
 #pragma once
 #include "Queue.hpp"
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 template <typename T>
@@ -131,6 +133,24 @@ private:
         delete curr;
     }
 
+    int countNodes(TreeNode<T> *node) {
+        if (node == nullptr) return 0;
+        return 1 + countNodes(node->left) + countNodes(node->right);
+    }
+
+    T* getNodeByIndex(TreeNode<T> *node, int index) {
+        if (node == nullptr) return nullptr;
+
+        int leftCount = countNodes(node->left);
+        if (index < leftCount) {
+            return getNodeByIndex(node->left, index);
+        } else if (index == leftCount) {
+            return &(node->data);
+        } else {
+            return getNodeByIndex(node->right, index - leftCount - 1);
+        }
+    }
+
 
 public:
     BST() {
@@ -196,5 +216,13 @@ public:
             }
         }
         cout << endl;
+    }
+
+    T* getRandomNode() {
+        int totalNodes = countNodes(root);
+        if (totalNodes == 0) return nullptr;
+
+        int randomIndex = rand() % totalNodes;
+        return getNodeByIndex(root, randomIndex);
     }
 };

@@ -23,11 +23,14 @@ public:
     string getRace();
     string getName();
     int getMagicPoints();
+    LinkedList<Monster>& getDefeatedMonsters();
 
     void setHitPoints(int hitPoints);
     void setRace(string race);
     void setName(string name);
     void setMagicPoints(int magicPoints);
+    void setDefeatedMonsters(const LinkedList<Monster>& defeatedMonsters);
+
 
     bool addDefeatedMonster(Monster nMonster);
     void displayDefeatedMonsters();

@@ -30,6 +30,10 @@ int Player::getMagicPoints(){
     return magicPoints;
 }
 
+LinkedList<Monster>& Player::getDefeatedMonsters() {
+    return defeatedMonsters;
+}
+
 void Player::setHitPoints(int hitPoints) {
     this->hitPoints = hitPoints;
 }
@@ -44,6 +48,10 @@ void Player::setName(string name) {
 
 void Player::setMagicPoints(int magicPoints) {
     this->magicPoints = magicPoints;
+}
+
+void Player::setDefeatedMonsters(const LinkedList<Monster>& defeatedMonsters) {
+    this->defeatedMonsters = defeatedMonsters;
 }
 
 bool Player::addDefeatedMonster(Monster nMonster) {

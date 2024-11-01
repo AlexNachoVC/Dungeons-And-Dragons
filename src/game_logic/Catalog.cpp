@@ -66,7 +66,11 @@ bool Catalog::loadMonstersFromCSV(const string& fileName) {
             file.close();
             return false;
         }
-        monsterCatalog.insert(nMonster);
+        if (!monsterCatalog.insert(nMonster)) {
+            cout << "No se pudo insertar el nuevo monstruo." << endl;
+            file.close();
+            return false;
+        }
     }
     file.close();
     return true;

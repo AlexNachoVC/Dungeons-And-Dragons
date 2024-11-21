@@ -102,7 +102,7 @@ public:
 
     bool insertOnOrder(T value) {
         DoublyLinkedListNode<T> *newNode = nullptr;
-        newNode = new (nothrow) DoublyLinkedListNode<T>(value);
+        newNode = new (nothrow) DoublyLinkedListNode(value);
 
         if (!newNode) {
             return false;
@@ -286,4 +286,48 @@ public:
         }
         cout << "\n";
     }
+
+    bool search(T value) {
+        DoublyLinkedListNode<T> *curr = head;
+        while (curr != nullptr && curr->data != value) {
+            curr = curr->next;
+        }
+
+        return curr != nullptr;
+    }
+
+    class Iterator {
+    private:
+        DoublyLinkedListNode<T>* current;
+    public:
+        Iterator(DoublyLinkedListNode<T>* node) : current(node) {}
+
+        T& operator*() {
+            return current->info;
+        }
+
+        Iterator& operator++() {
+            if (current) {
+                current = current->next;
+            }
+            return *this;
+        }
+
+        bool operator==(const Iterator& other) const {
+            return current == other.current;
+        }
+
+        bool operator!=(const Iterator& other) const {
+            return current != other.current;
+        }
+    };
+    
+    Iterator begin() {
+        return Iterator(head);
+    }
+
+    Iterator end() {
+        return Iterator(nullptr);
+    }
 };
+

@@ -4,14 +4,23 @@ Dungeon::Dungeon() : Rooms() {}
 
 
 Dungeon::~Dungeon() {
-    Rooms.deleteLinkedList();
+    Rooms.deleteGraph();
+}
+
+unsigned int Dungeon::getSize() {
+    return Rooms.getSize();
 }
 
 void Dungeon::traverseDungeon() {
-    this->Rooms.printListForwards();
+    this->Rooms.printGraph();
 }
 
-bool Dungeon::createRoom(Monster& monster, int roomNumber) {
+bool Dungeon::createDungeon(string filename) {
+    return Rooms.loadFile(filename);
+}
+
+bool Dungeon::createRoom(unsigned int roomNumber, Monster monster) {
     Room newRoom(monster, roomNumber);
-    return this->Rooms.append(newRoom);
+    Rooms.setVertex(roomNumber, newRoom);
+    return true;
 }

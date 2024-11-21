@@ -7,8 +7,6 @@
 
 using namespace std;
 
-#define NUM_CUARTOS 20
-
 int main() {
     Catalog myCatalog;
     Dungeon myDungeon;
@@ -19,7 +17,12 @@ int main() {
     }
 
     cout << "Creando Dungeon..." << endl;
-    for (int c = 0; c < NUM_CUARTOS; c++) {
+    if (!myDungeon.createDungeon("assets/dungeon.txt")) {
+        cout << "No se pudo crear el Dungeon" << endl;
+        return 0;
+    }
+
+    for (unsigned int c = 0; c < myDungeon.getSize(); c++) {
         Monster *pMonster = nullptr, copiaMonstruo;
 
         pMonster = myCatalog.selectRandomMonster();
@@ -29,7 +32,7 @@ int main() {
         }
 
         copiaMonstruo = *pMonster;
-        if(!myDungeon.createRoom(copiaMonstruo, c + 1)) {
+        if(!myDungeon.createRoom(c + 1, copiaMonstruo)) {
             cout << "No se pudo insertar cuarto con monstruo al calabozo" << endl;
             return 0;
         }

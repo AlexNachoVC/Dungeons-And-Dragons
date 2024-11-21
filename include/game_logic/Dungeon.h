@@ -2,17 +2,19 @@
 
 #include <iostream>
 #include "Room.h"
-#include "../../lib/templates/DoublyLinkedList.hpp"
+#include "../../lib/templates/Graph.hpp"
 
 using namespace std;
 
 class Dungeon {
 private:
-    DoublyLinkedList<Room> Rooms;
+    Graph<Room> Rooms;
 
 public:
     Dungeon();
     ~Dungeon();
+    unsigned int getSize();
     void traverseDungeon();
-    bool createRoom(Monster& monster, int roomNumber);
+    bool createRoom(unsigned int roomNumber, Monster monster);
+    bool createDungeon(string filename);
 };

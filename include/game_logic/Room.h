@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Monster.h"
-#include "Catalog.h"
+
 using namespace std;
 
 class Room {

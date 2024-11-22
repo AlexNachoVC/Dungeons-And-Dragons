@@ -21,6 +21,5 @@ bool Dungeon::createDungeon(string filename) {
 
 bool Dungeon::createRoom(unsigned int roomNumber, Monster monster) {
     Room newRoom(monster, roomNumber);
-    Rooms.setVertex(roomNumber, newRoom);
-    return true;
+    return Rooms.setVertex(roomNumber, newRoom);
 }

@@ -32,7 +32,7 @@ int main() {
         }
 
         copiaMonstruo = *pMonster;
-        if(!myDungeon.createRoom(c + 1, copiaMonstruo)) {
+        if(!myDungeon.createRoom(c, copiaMonstruo)) {
             cout << "No se pudo insertar cuarto con monstruo al calabozo" << endl;
             return 0;
         }

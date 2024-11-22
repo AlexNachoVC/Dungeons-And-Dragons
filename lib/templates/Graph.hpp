@@ -73,12 +73,12 @@ public:
         }
     }
 
-    bool setVertex(unsigned int vertex, T data) { // aqui tengo problemas porque nunca se asigna (creo) el size del dungeon. asi que siempre lo toma como false, y tengo que hardcodear el return true en dungeon
-        if (vertex < size) {
-            vertexes[vertex].data = data;
-            return true; 
+    bool setVertex(unsigned int vertex, T data) { 
+        if (!size || vertex >= size) {
+            return false;
         }
-        return false;
+        vertexes[vertex].data = data;
+        return true;
     }
 
     T getVertexData(unsigned int vertex) {

@@ -8,17 +8,16 @@ private:
     unsigned int size;
 
     unsigned int getIndex(T data) {
-        if(!HashFunction) {
+        if(!hashFunction) {
             return 0;
         }
         return HashFunction(data, size);
     }
-
+    
+    using HashFunction = unsigned int (*)(T&, unsigned int tableSize);
     HashFunction hashFunction;
 
 public:
-    using HashFunction = unsigned int (*)(T&, unsigned int tableSize);
-
     HashTable() {
         hashFunction = nullptr;
         table = nullptr;
@@ -27,7 +26,7 @@ public:
     ~HashTable() { deleteTable(); }
 
     bool createTable(unsigned int nSize, HashFunction hashF) {
-        if (!nSize || table || !hashFunction) {
+        if (!nSize || table || !hashF) {
             return false;
         }
 
@@ -39,7 +38,6 @@ public:
         size = nSize;
         hashFunction = hashF;
         return true;
-        
     }
 
     void deleteTable() {
@@ -103,4 +101,26 @@ public:
         cout << "Biggest was: " << biggest << endl;
     }
 
+    T* getRandomElement() {
+        if (!table || size == 0) {
+            return nullptr;
+        }
+
+        unsigned int randomIndex = rand() % size;
+
+        DoublyLinkedList<T>& list = table[randomIndex];
+
+        unsigned int listSize = list.getSize();
+        if (listSize == 0) {
+            return nullptr;
+        }
+        unsigned int randomElementIndex = rand() % listSize;
+
+        DoublyLinkedListNode<T>* current = list.getHead();
+        for (unsigned int i = 0; i < randomElementIndex; ++i) {
+            current = current->next;
+        }
+
+        return &current->data;
+    }
 };

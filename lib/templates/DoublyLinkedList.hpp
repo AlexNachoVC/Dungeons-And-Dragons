@@ -140,6 +140,10 @@ public:
         return true;
     }
 
+    DoublyLinkedListNode<T>* getHead() const {
+        return head;
+    }
+
     bool deleteElement(T element) {
         if (!head) {
             return false;
@@ -294,6 +298,16 @@ public:
         }
 
         return curr != nullptr;
+    }
+
+    unsigned int getSize() const {
+        unsigned int size = 0;
+        DoublyLinkedListNode<T>* tmp = head;
+        while (tmp) {
+            ++size;
+            tmp = tmp->next;
+        }
+        return size;
     }
 
     class Iterator {

@@ -37,6 +37,8 @@ public:
 
     void displayStats();
 
+    unsigned int hashMonster(Monster &monster, unsigned int tableSize);
+
     friend ostream& operator<<(ostream& os, const Monster& monster) {
         os << monster.name;
         return os;

@@ -88,3 +88,27 @@ void Monster::displayStats() {
     cout << "Hit Points: " << this->hitPoints << endl;
     cout << "Alignment: " << this->alignment << endl;
 }
+
+unsigned int Monster::hashMonster(Monster &monster, unsigned int tableSize) {
+    string value;
+    unsigned int hashValue = 0, size = 0;
+
+    value = monster.getName();
+    size = value.size();
+
+    for (unsigned int i = 0; i < size; i++) {
+        hashValue += value[i];
+    }
+    
+    value = monster.getType();
+    size = value.size();
+
+    for (unsigned int i = 0; i < size; i++) {
+        hashValue += value[i];
+    }
+
+    hashValue *= monster.getArmorClass();
+    hashValue *= monster.getHitPoints();
+
+    return hashValue % tableSize;
+}

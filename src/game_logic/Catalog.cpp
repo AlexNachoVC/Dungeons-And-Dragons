@@ -1,4 +1,6 @@
 #include "../../include/game_logic/Catalog.h"
+#include "../../include/game_logic/Monster.h"
+
 
 Catalog::Catalog() : monsterCatalog() {
     srand(static_cast<unsigned int>(time(0)));
@@ -9,6 +11,7 @@ Catalog::~Catalog() {}
 bool Catalog::loadMonstersFromCSV(const string& fileName) {
     ifstream        file(fileName);
     string          line;
+    unsigned int size(0);
 
     if (!file.is_open()) {
         cerr << "Error al abrir el archivo: " << fileName << endl;
@@ -66,7 +69,9 @@ bool Catalog::loadMonstersFromCSV(const string& fileName) {
             file.close();
             return false;
         }
-        if (!monsterCatalog.insert(nMonster)) {
+        size++;
+
+        if (!monsterCatalog.createTable(size, hashMonster)) {
             cout << "No se pudo insertar el nuevo monstruo." << endl;
             file.close();
             return false;
@@ -76,6 +81,8 @@ bool Catalog::loadMonstersFromCSV(const string& fileName) {
     return true;
 }
 
+
+
 Monster* Catalog::selectRandomMonster() {
-    return monsterCatalog.getRandomNode();
+    return monsterCatalog.getRandomElement();
 }

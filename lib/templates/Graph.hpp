@@ -20,6 +20,7 @@ class Graph {
 private:
     Vertex<T>* vertexes;
     unsigned int size;
+    unsigned int* previous;
 
     void clearVisited() {
         for (unsigned int i = 0; i < size; ++i) {
@@ -57,6 +58,7 @@ public:
         size = nSize;
         for (unsigned int i = 0; i < size; ++i) {
             vertexes[i].visited = false;
+            previous[i] = UINT16_MAX;
         }
 
         return true;
@@ -69,8 +71,13 @@ public:
         if (vertexes) {
             delete[] vertexes;
             vertexes = nullptr;
-            size = 0;
         }
+
+        if (previous) {
+            delete[] previous;
+            previous = nullptr;
+        }
+        size = 0;
     }
 
     bool setVertex(unsigned int vertex, T data) { 
@@ -165,11 +172,27 @@ public:
                         return false;
                     }
                     vertexes[edge].visited = true;
+                    previous[edge] = vertex;
                 }
             }
         }
 
         cout << "\n";
+        return true;
+    }
+
+    bool printPath(unsigned int startVertex, unsigned int endVertex) {
+        if (endVertex >= size || previous[endVertex] == UINT32_MAX) {
+            return false;
+        }
+
+        DoublyLinkedList<unsigned int> path;
+        for (unsigned int vertex = endVertex; vertex != UINT32_MAX; vertex = previous[vertex]) {
+            path.prepend(vertex);
+        }
+
+        path.printListForwards();
+        
         return true;
     }
     

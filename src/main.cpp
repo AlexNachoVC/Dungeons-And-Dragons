@@ -8,6 +8,7 @@
 using namespace std;
 
 int main() {
+    unsigned int start, end;
     Catalog myCatalog;
     Dungeon myDungeon;
 
@@ -40,5 +41,27 @@ int main() {
 
     myDungeon.traverseDungeon();
 
+    cout << "Elije una ruta:\n";
+    do {
+        cout << "Dame el cuarto inicial: ";
+        cin >> start;
+        cout << "Dame el cuarto final: ";
+        cin >> end;
+    } while (end > myDungeon.getSize() || start == end);
+
+    if(!myDungeon.traceRoute(start, end)) {
+        cout << "No existe ruta de " << start << " a " << end << "\n";
+        return 0;
+    }
+
+    do {
+        Room *current = nullptr;
+
+        current = myDungeon.currentRoomRoute();
+        if(current) {
+            cout << "Entrando a " << *current << "\n";
+        }
+    } while (myDungeon.moveRoute());
+
     return 0;
-}
+    }

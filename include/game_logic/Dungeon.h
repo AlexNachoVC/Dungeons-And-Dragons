@@ -17,4 +17,7 @@ public:
     void traverseDungeon();
     bool createRoom(unsigned int roomNumber, Monster monster);
     bool createDungeon(string filename);
+    bool traceRoute(unsigned int start, unsigned int end);
+    Room* currentRoomRoute();
+    bool moveRoute();
 };

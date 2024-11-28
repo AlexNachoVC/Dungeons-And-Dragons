@@ -41,12 +41,13 @@ public:
     Graph() {
         vertexes = nullptr;
         size = 0;
+        previous = nullptr;
     }
 
     ~Graph() { deleteGraph(); }
 
     bool createGraph(unsigned int nSize) {
-        if (nSize == 0 || vertexes != nullptr) {
+        if (nSize == 0 || vertexes || previous) {
             return false;
         }
 
@@ -56,9 +57,14 @@ public:
         }
 
         size = nSize;
+            
+        previous = new(nothrow) unsigned int[nSize];
+		if (!previous) {
+			return false;
+		}
+
         for (unsigned int i = 0; i < size; ++i) {
-            vertexes[i].visited = false;
-            previous[i] = UINT16_MAX;
+            previous[i] = UINT32_MAX;
         }
 
         return true;
@@ -89,6 +95,10 @@ public:
     }
 
     T* getVertexData(unsigned int vertex) {
+        if (vertex >= size || !vertexes) {
+			return nullptr;
+		}
+
         return &vertexes[vertex].data;
     }
 
@@ -148,14 +158,16 @@ public:
         Queue<unsigned int> queue;
 
         if (!size || startVertex >= size) {
+            delete[] previous;
             return false;
         }
 
         clearVisited();
 
-        cout << "BFS(" << startVertex << "): ";
+        //cout << "BFS(" << startVertex << "): ";
 
         if (!queue.enqueue(startVertex)) {
+            delete[] previous;
             return false;
         }
         vertexes[startVertex].visited = true;
@@ -163,12 +175,13 @@ public:
         while (!queue.isEmpty()) {
             unsigned int vertex = *queue.peek();
 
-            cout << vertex << " ";
+            //cout << vertex << " ";
             queue.deque();
 
             for (auto edge : vertexes[vertex].edges) {
                 if (!vertexes[edge].visited) {
                     if (!queue.enqueue(edge)) {
+                        delete[] previous;
                         return false;
                     }
                     vertexes[edge].visited = true;
@@ -182,21 +195,28 @@ public:
     }
 
     bool printPath(unsigned int startVertex, unsigned int endVertex, DoublyLinkedList<T> &path) {
-        if (endVertex >= size || previous[endVertex] == UINT32_MAX) {
-            return false;
-        }
-
-        for (unsigned int vertex = endVertex; vertex != UINT32_MAX; vertex = previous[vertex]) {
-            T* data = getVertexData(vertex);
-            if (!data) {
-                return false;
-            }
-            path.prepend(*data);
-        }
-
-        path.printListForwards();
-
-        return true;
+        DoublyLinkedList<unsigned int> camino;  //Lista para los indices de vertices, solo la uso al imprimir
+		if (!BFS(startVertex)) {   //Inicializar recorrido BFS
+			return false;
+		}
+		unsigned int curr = endVertex;
+		while (curr != UINT32_MAX) {
+			T* dato = getVertexData(curr);
+			if (!dato) {
+                std::cout << "Error: Vertex data is null for vertex " << curr << std::endl;
+				return false;
+			}
+			if (!path.prepend(*dato)) {  //path es la ruta de objetos
+				return false;
+			}
+			if (!camino.prepend(curr)) {
+				return false;
+			}
+			curr = previous[curr];
+		}
+		//path.imprimeListaDoble();    //Ahorita no necesitamos imprimir los objetos cuarto
+		camino.printListForwards();   //Imprimo indices
+		return true;
     }
     
     bool loadFile(const string& filename) {

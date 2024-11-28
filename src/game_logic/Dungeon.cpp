@@ -1,6 +1,6 @@
 #include "../../include/game_logic/Dungeon.h"
 
-Dungeon::Dungeon() : Rooms(), currentPosition(path.end()) {}
+Dungeon::Dungeon() : Rooms(), currentPosition(path.begin()) {}
 
 
 Dungeon::~Dungeon() {
@@ -25,21 +25,22 @@ bool Dungeon::createRoom(unsigned int roomNumber, Monster monster) {
 }
 
 bool Dungeon::traceRoute(unsigned int start, unsigned int end) {
-    if (!Rooms.BFS(start)) {
-        return false; 
+    if (Rooms.printPath(start, end, path)) {
+        currentPosition = path.begin();
+        return true;
     }
 
-    currentPosition = path.begin();
-
-    return Rooms.printPath(start, end, path);
+    return false;
 }
 
 Room* Dungeon::currentRoomRoute() {
-    if (currentPosition != path.end()) {
+    if (&currentPosition) {
         return &(*currentPosition);
     }
+    else {
+        return nullptr;
+    }
     
-    return nullptr;
 }
 
 bool Dungeon::moveRoute() {

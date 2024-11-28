@@ -88,8 +88,8 @@ public:
         return true;
     }
 
-    T getVertexData(unsigned int vertex) {
-        return vertexes[vertex].data;
+    T* getVertexData(unsigned int vertex) {
+        return &vertexes[vertex].data;
     }
 
     unsigned int getSize() {
@@ -181,18 +181,21 @@ public:
         return true;
     }
 
-    bool printPath(unsigned int startVertex, unsigned int endVertex) {
+    bool printPath(unsigned int startVertex, unsigned int endVertex, DoublyLinkedList<T> &path) {
         if (endVertex >= size || previous[endVertex] == UINT32_MAX) {
             return false;
         }
 
-        DoublyLinkedList<unsigned int> path;
         for (unsigned int vertex = endVertex; vertex != UINT32_MAX; vertex = previous[vertex]) {
-            path.prepend(vertex);
+            T* data = getVertexData(vertex);
+            if (!data) {
+                return false;
+            }
+            path.prepend(*data);
         }
 
         path.printListForwards();
-        
+
         return true;
     }
     

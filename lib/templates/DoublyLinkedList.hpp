@@ -303,7 +303,7 @@ public:
         Iterator(DoublyLinkedListNode<T>* node) : current(node) {}
 
         T& operator*() {
-            return current->info;
+            return current->data;
         }
 
         Iterator& operator++() {

@@ -3,12 +3,16 @@
 #include <iostream>
 #include "Room.h"
 #include "../../lib/templates/Graph.hpp"
+#include "../../lib/templates/DoublyLinkedList.hpp"
+
 
 using namespace std;
 
 class Dungeon {
 private:
     Graph<Room> Rooms;
+    DoublyLinkedList<Room> path;
+    DoublyLinkedList<Room>::Iterator currentPosition;
 
 public:
     Dungeon();

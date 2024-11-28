@@ -40,7 +40,6 @@ Room* Dungeon::currentRoomRoute() {
     else {
         return nullptr;
     }
-    
 }
 
 bool Dungeon::moveRoute() {

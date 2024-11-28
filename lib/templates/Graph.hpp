@@ -195,27 +195,26 @@ public:
     }
 
     bool printPath(unsigned int startVertex, unsigned int endVertex, DoublyLinkedList<T> &path) {
-        DoublyLinkedList<unsigned int> camino;  //Lista para los indices de vertices, solo la uso al imprimir
-		if (!BFS(startVertex)) {   //Inicializar recorrido BFS
+        DoublyLinkedList<unsigned int> breadcrumbs;  
+		if (!BFS(startVertex)) {   
 			return false;
 		}
-		unsigned int curr = endVertex;
-		while (curr != UINT32_MAX) {
-			T* dato = getVertexData(curr);
-			if (!dato) {
-                std::cout << "Error: Vertex data is null for vertex " << curr << std::endl;
+        
+        for (unsigned int vertex = endVertex; vertex != UINT32_MAX; vertex = previous[vertex]) {
+			T* data = getVertexData(vertex);
+			if (!data) {
+                cout << "Error: Vertex data is null for vertex " << vertex << endl;
 				return false;
 			}
-			if (!path.prepend(*dato)) {  //path es la ruta de objetos
+			if (!path.prepend(*data)) {  
 				return false;
 			}
-			if (!camino.prepend(curr)) {
+			if (!breadcrumbs.prepend(vertex)) {
 				return false;
 			}
-			curr = previous[curr];
 		}
-		//path.imprimeListaDoble();    //Ahorita no necesitamos imprimir los objetos cuarto
-		camino.printListForwards();   //Imprimo indices
+
+		breadcrumbs.printListForwards();   
 		return true;
     }
     
